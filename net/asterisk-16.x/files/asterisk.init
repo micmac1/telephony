@@ -121,3 +121,16 @@ start_service() {
   procd_close_instance
 }
 
+service_triggers() {
+  local interface
+
+  config_load $NAME
+
+  config_get interface triggers interface
+
+  if [ -n "$interface" ]; then
+    for n in $interface; do
+      procd_add_interface_trigger "interface.*.up" $n /etc/init.d/$NAME restart
+    done
+  fi
+}
