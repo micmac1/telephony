@@ -497,7 +497,9 @@ $(foreach m,$(AST_CFG_FILES),$(call Package/$(PKG_NAME)/install/conffile,$(1),$(
 $(foreach m,$(AST_EMB_MODULES),$(call Package/$(PKG_NAME)/install/module,$(1),$(m));)
 	$(INSTALL_DIR) $(1)/usr/share/asterisk/sounds/
 	$(INSTALL_DIR) $(1)/etc/config
+	$(INSTALL_DIR) $(1)/etc/hotplug.d/iface
 	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/asterisk.hotplug $(1)/etc/hotplug.d/iface/99-asterisk
 	$(INSTALL_BIN) ./files/asterisk.init $(1)/etc/init.d/asterisk
 	$(INSTALL_CONF) ./files/asterisk.config $(1)/etc/config/asterisk
 endef
